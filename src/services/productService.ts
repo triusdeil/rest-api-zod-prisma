@@ -1,4 +1,4 @@
-import type { Product } from "../schemas/productsSchema";
+import type { CreateProductType, UpdateProductBodyType, UpdateProductParamsType } from "../schemas/productsSchema";
 import { prismaConn } from "../config/prismaConn";
 
 export const getAllProductsService = async () => {
@@ -11,7 +11,7 @@ export const getProductByIdService = async (id: number) => {
     return product
 }
 
-export const createProductService = async (product: Product) => {
+export const createProductService = async (product: CreateProductType) => {
     const createdProduct = await prismaConn.products.create({
         data: product,
     })
@@ -23,6 +23,7 @@ export const deleteProductService = async (id:number) => {
     return deletedProduct
 }
 
-export const updateProductService = async(id:number, product:Product) => {
-    console.log(product)
+export const updateProductService = async(id:number, product:UpdateProductBodyType) => {
+    const updateProduct = await prismaConn.products.update({where: {id}, data: product} )
+    return updateProduct
 }
