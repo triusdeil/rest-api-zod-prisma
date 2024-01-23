@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import {prismaConn} from '../services/prismaConn'
+import {prismaConn} from '../config/prismaConn'
  
 export const getAllUsers = ( _req:Request, res:Response ) => {
     const users = prismaConn.user.findMany()
